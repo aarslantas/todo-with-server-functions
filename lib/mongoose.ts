@@ -29,7 +29,6 @@ if (!cached) {
 
 const dbConnect = async (): Promise<Mongoose> => {
   if (cached.conn) {
-    logger.info("Using existing mongoose connection");
     return cached.conn;
   }
 
@@ -39,11 +38,9 @@ const dbConnect = async (): Promise<Mongoose> => {
         dbName: "devflow",
       })
       .then((result) => {
-        logger.info("Connected to MongoDB");
         return result;
       })
       .catch((error) => {
-        logger.info("Error connecting to MongoDB: %s", error);
         throw new Error(`Failed to connect to MongoDB: ${error}`);
       });
   }
